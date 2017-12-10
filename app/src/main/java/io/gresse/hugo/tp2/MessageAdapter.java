@@ -1,6 +1,7 @@
 package io.gresse.hugo.tp2;
 
 import android.support.v7.widget.RecyclerView;
+import android.text.format.DateFormat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
+import org.w3c.dom.Text;
+
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -52,13 +56,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
 
         TextView   mUserTextView;
         TextView   mContentTextView;
+        TextView   mDate;
         ImageView  mUserImageView;
 
 
 
         ViewHolder(View itemView) {
             super(itemView);
-
+            mDate = itemView.findViewById(R.id.timeTextView);
             mUserTextView = itemView.findViewById(R.id.userTextView);
             mContentTextView = itemView.findViewById(R.id.contentTextView);
             mUserImageView = itemView.findViewById(R.id.userImage);
@@ -72,6 +77,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
                     .into(mUserImageView);
             mUserTextView.setText(message.userName + ": ");
             mContentTextView.setText(message.content);
+            mDate.setText(DateFormat.format("MM/dd/yyyy hh:mma", new Date(message.timestamp)).toString());
         }
     }
 }

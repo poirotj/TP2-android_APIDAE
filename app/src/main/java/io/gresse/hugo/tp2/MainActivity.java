@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -18,6 +19,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 /**
@@ -28,7 +31,8 @@ public class MainActivity extends AppCompatActivity implements ValueEventListene
     public static final String TAG = MainActivity.class.getSimpleName();
 
     EditText       mInputEditText;
-    ImageButton         mSendButton;
+    TextView       mdate;
+    ImageButton    mSendButton;
     MessageAdapter mMessageAdapter;
     User           utilisateur;
 
@@ -48,6 +52,7 @@ public class MainActivity extends AppCompatActivity implements ValueEventListene
         mInputEditText = findViewById(R.id.inputEditText);
         mSendButton = findViewById(R.id.sendButton);
 
+
         mMessageAdapter = new MessageAdapter(new ArrayList<Message>());
 
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
@@ -65,8 +70,10 @@ public class MainActivity extends AppCompatActivity implements ValueEventListene
                     return;
                 }
                 DatabaseReference newData = mDatabaseReference.push();
+                Calendar cal = new GregorianCalendar();
+                Long date = cal.getTimeInMillis();
                 newData.setValue(
-                        new Message(mInputEditText.getText().toString(), utilisateur.name, utilisateur.mail, 0L));
+                        new Message(mInputEditText.getText().toString(), utilisateur.name, utilisateur.mail, date));
                 mInputEditText.setText("");
             }
         });
