@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">TP2</string>
+    <string name="Name">Name</string>
+    <string name="Mail">E-mail</string>
+    <string name="Button">Valider</string>
+    <string name="wrong_fiels">! champs incorrect</string>
+</resources>
